@@ -1,4 +1,4 @@
-#This project the 'netflix_data.csv' file
+#This project requires 'netflix_data.csv' file
 
 import pandas as pd
 import matplotlib.pyplot as plt
