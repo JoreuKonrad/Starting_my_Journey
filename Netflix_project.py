@@ -1,4 +1,5 @@
 #This project requires 'netflix_data.csv' file
+#The main objetive of this project is importing/manipulate the datas and plotting.
 
 import pandas as pd
 import matplotlib.pyplot as plt
