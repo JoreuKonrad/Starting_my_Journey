@@ -4,6 +4,10 @@ import pandas as pd
 import random
 import datetime
 
+#Setting the taxes
+fuel_Price = 5.9
+parking_tax = 200
+
 #Creating Client DataFrame
 client = []
 Client = pd.DataFrame(client, columns=['ID','Model','Company'])
@@ -68,14 +72,23 @@ for x in range(5):
     Station.loc[x, 'Depature'] = Depature
 
     #Calculating the Total Bill
-    parking_tax = (1 + Depature.day - random_date.day) * 200
-    fuel_Price = 5.9
+    parking_bill = (1 + Depature.day - random_date.day) * parking_tax
     fuel_bill = fuel_Price * Station.loc[x, 'Fuel_Filled']
-    total_bill = parking_tax + fuel_bill
-    Station.loc[x, 'Parking_Tax'] = parking_tax
+    total_bill = parking_bill + fuel_bill
+    Station.loc[x, 'Parking_Tax'] = parking_bill
     Station.loc[x, 'Fuel_Price'] = fuel_Price
     Station.loc[x, 'Fuel_Bill'] = fuel_bill
     Station.loc[x, 'Total_Bill'] = total_bill
+
+#Setting to show all the coloumns and more rows
+pd.set_option('display.max_rows', 30)
+pd.set_option('display.max_columns', 10)
+pd.set_option('display.width', 1000)
+
+#Reorganazing the Station columns
+Station = Station[['ID', 'Model', 'Company', 'Arrival', 'Depature',
+                   'Parking_Tax', 'Fuel_Filled', 'Fuel_Price', 'Fuel_Bill',
+                   'Total_Bill']]
 
 print(Station.sort_values(by='Arrival',ignore_index=True))
 
