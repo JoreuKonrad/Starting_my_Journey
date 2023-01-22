@@ -15,6 +15,8 @@ lista_links_produtos = bsObj.find_all('a',{'class':'info-product'})
 
 lista_vazia = []
 df_links_produtos = pd.DataFrame(lista_vazia,columns=['Links'])
+df_produtos = pd.DataFrame(lista_vazia,columns=['Nome','Preco','Parcelas','Marca','Codigo'])
+    
 
 for link_produto in lista_links_produtos:
     link_produto = link_produto['href']
@@ -38,18 +40,18 @@ for endereco_produto in df_links_produtos['Links']:
 
     codigo_produto = bsObj.find('span',{'class':'ref'}).get_text(' ',strip=True).replace('(Cód.: ','').replace(')','')
 
-    
     td_infos_produto = bsObj.find_all('td')
-    marca_produto = td_infos_produto[7]
-    marca_produto = marca_produto.get_text(' ',strip=True)
+    x = 0
+    for td_info in td_infos_produto:
+    
+        td_info = str(td_info)
+    
+        if td_info == '<td>Marca</td>':
+            marca_produto = td_infos_produto[x+1].get_text()       
+        x += 1
     
     
-    df_produtos = pd.DataFrame(lista_vazia,columns=['Nome',
-                                                'Preco',
-                                                'Parcelas',
-                                                'Marca',
-                                                'Codigo'
-                                                ])
+    
     df_produtos.loc[len(df_produtos)] = [nome_produto,preco_produto,parcelamento_produto,marca_produto,codigo_produto]
     print('Produto '+ nome_produto +' registrado!\n')
     
