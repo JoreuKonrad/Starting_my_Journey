@@ -4,6 +4,10 @@
 #   The modules we import/packages (ex:pandas)
 #   And the modules we do not import
 
-if __name__ == '__main__':
-    print(__name__)
+#   if __name__ == '__main__':
+
+def test():
+    return print('Testante')
+
+
 
