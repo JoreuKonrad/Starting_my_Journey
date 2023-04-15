@@ -7,7 +7,7 @@ root.title('Simple Calculator')
 root.geometry("400x400")
 
 # Creating a db
-conn = sqlite3.connect('adress_book.db')
+conn = sqlite3.connect('address_book.db')
 
 c = conn.cursor()
 
@@ -26,7 +26,7 @@ c.execute("""
 # Creating submit for database
 def submit():
     # Creating a db
-    conn = sqlite3.connect('adress_book.db')
+    conn = sqlite3.connect('address_book.db')
     # Create Cursor
     c = conn.cursor()
 
@@ -49,20 +49,25 @@ def submit():
     state.delete(0,END)
     zipcode.delete(0,END)
 
+    # Commit changes
+    conn.commit()
+
+    # Close connection
+    conn.close()
+
 # Creating Query Function
 def query():
-    # Creating a db
-    conn = sqlite3.connect('adress_book.db')
+    conn = sqlite3.connect('address_book.db')
     # Create Cursor
     c = conn.cursor()
 
     #Query DB
-    c.execute("SELECT *, oid FROM addresses")
+    c.execute("SELECT *,oid FROM addresses")
     records = c.fetchall()
 
     print_records = ''
-    for record in records[0]:
-        print_records += str(record) + '\n'
+    for record in records:
+        print_records += str(record[0]) + ' ' + str(record[1]) + '\n'
     
     query_label = Label(root,text=print_records)
     query_label.grid(row=8,column=0,columnspan=2)
