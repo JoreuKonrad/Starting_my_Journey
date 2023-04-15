@@ -1,0 +1,18 @@
+from tkinter import *
+from PIL import ImageTk,Image
+
+
+root = Tk()
+root.title('Frame')
+
+frame = LabelFrame(root,text='Test',padx=5,pady=5)
+frame.grid(row=0,column= 0)
+frame.pack(padx=20,pady=20)
+
+
+
+#b = Button(root,text='Dont click me')
+#b.grid(row=0,column=0)
+#b.pack()
+
+root.mainloop()
