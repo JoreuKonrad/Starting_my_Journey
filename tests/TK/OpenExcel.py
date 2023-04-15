@@ -8,7 +8,7 @@ root.geometry('500x900')
 
 
 wb = Workbook()
-wb = load_workbook('pizza.xlsx')
+wb = load_workbook('Table.xlsx')
 ws = wb.active
 
 column_a = ws['A']
