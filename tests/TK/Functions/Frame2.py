@@ -5,7 +5,7 @@ from tkinter import *
 app = Tk()
 
 # Give a title to your app
-app.title("Vinayak App")
+app.title("Teste App")
 
 # Constructing the first frame, frame1
 frame1 = LabelFrame(app, text="Fruit", bg="green",

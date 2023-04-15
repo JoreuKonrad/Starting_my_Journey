@@ -3,7 +3,7 @@ from tkinter import *
 from PIL import Image
 
 # Define the directory containing the images
-image_dir = "C:/Users/joreu.konrad/Documents/VS Code Workplaces/Starting My Journey/Starting_my_Journey/Tests/TK/Images/"
+image_dir = "C:/Users/joreu.konrad/Documents/VS Code Workplaces/Starting My Journey/Starting_my_Journey/Tests/TK/Projects/Images/"
 
 # Define the Tkinter window
 root = Tk()
