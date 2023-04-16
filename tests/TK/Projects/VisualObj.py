@@ -34,7 +34,7 @@ my_tree['columns'] = ('Marca','Nome','Formato','Borda','Superficie')
 
 # Formating
 my_tree.column('#0',width=0, minwidth=0)
-my_tree.column('Marca',anchor=W,width=20)
+my_tree.column('Marca',anchor=W,width=30)
 my_tree.column('Nome',anchor=W,width=150)
 my_tree.column('Formato',anchor=W,width=20)
 my_tree.column('Borda',anchor=W,width=80)
@@ -49,10 +49,14 @@ my_tree.heading('Borda', text='Borda',anchor=CENTER)
 my_tree.heading('Superficie',text='Superficie',anchor=W)
 
 
+
+
+button_img1
+
+
+# Datas
+
 data = pd.read_excel('Table.xlsx',index_col=0)
-
-
-
 
 for record in range(len(data)):
     my_tree.insert(parent='',index='end',text='',iid=record,values=(data.loc[record,'Marca'],data.loc[record,'Nome'],data.loc[record,'Formato'],data.loc[record,'Borda'],data.loc[record,'Superficie']))
