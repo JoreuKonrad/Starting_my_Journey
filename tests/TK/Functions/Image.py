@@ -4,7 +4,7 @@ from PIL import ImageTk,Image
 root = Tk()
 root.title('Images')
 
-my_img = ImageTk.PhotoImage(Image.open('Imagem.jpg'))
+my_img = ImageTk.PhotoImage(Image.open('Image.jpg'))
 my_label = Label(image=my_img)
 my_label.pack()
 
