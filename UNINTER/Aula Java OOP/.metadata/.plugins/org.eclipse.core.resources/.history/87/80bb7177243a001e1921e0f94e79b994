@@ -1,0 +1,51 @@
+package br.com.springboot.bo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.springboot.dao.CRUD;
+import br.com.springboot.dao.ClienteDAO;
+import br.com.springboot.model.Cliente;
+
+@Service
+public class ClienteBO implements CRUD<Cliente,Long> {
+	
+	@Autowired
+	private ClienteDAO dao;
+
+	@Override
+	public Cliente pesquisaPeloId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cliente> lista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insere(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void atualiza(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
+}

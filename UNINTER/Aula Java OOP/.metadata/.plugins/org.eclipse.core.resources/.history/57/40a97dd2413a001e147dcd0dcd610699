@@ -1,0 +1,62 @@
+package br.com.springboot.bo;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.ClassOrderer.OrderAnnotation;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import br.com.springboot.model.Cliente;
+import br.com.springboot.model.Sexo;
+
+
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@TestMethodOrder(OrderAnnotation.class)
+public class ClienteBOTest {
+	
+	@Autowired
+	private ClienteBO bo;
+	
+	@Test
+	@Order(1)
+	public void insere() {
+		Cliente cliente = new Cliente();
+		cliente.setNome("Joreu");
+		cliente.setCpf("3490833420");
+		cliente.setDataNascimento(LocalDate.of(2000, 2, 20));
+		cliente.setSexo(Sexo.MASCULINO);
+		cliente.setTelefone("238928390");
+		cliente.setCelular("324234");
+		cliente.setAtivo(true);
+		bo.insere(cliente);
+		
+	}
+
+	@Test
+	@Order(2)
+	public void pesquisaPeloId() {
+		Cliente cliente = bo.pesquisaPeloId(1L);
+		System.out.println(cliente);
+		
+	}
+	
+	@Test
+	@Order(3)
+	public void atualiza() {
+		Cliente cliente = bo.pesquisaPeloId(1L);
+		cliente.setCpf("456789");
+		bo.atualiza(cliente);
+		
+		
+	}
+	
+	
+	
+}

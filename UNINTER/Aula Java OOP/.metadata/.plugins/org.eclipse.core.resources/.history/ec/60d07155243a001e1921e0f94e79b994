@@ -1,0 +1,17 @@
+package br.com.springboot.bo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.springboot.dao.ClienteDAO;
+
+@Service
+public class ClienteBO {
+	
+	@Autowired
+	private ClienteDAO dao;
+	
+	
+	
+	
+}

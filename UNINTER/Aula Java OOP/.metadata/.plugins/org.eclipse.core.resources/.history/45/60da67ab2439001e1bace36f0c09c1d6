@@ -1,0 +1,47 @@
+package br.com.springboot.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+import org.apache.logging.log4j.util.PerformanceSensitive;
+
+import br.com.springboot.model.Cliente;
+
+public class ClienteDAO implements CRUD<Cliente,Long> {
+
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	@Override
+	public Cliente pesquisaPeloId(Long id) {
+		return entityManager.find(Cliente.class, id);
+	}
+
+	@Override
+	public List<Cliente> lista() {
+		Query query = entityManager.createQuery("Select c from Cliente");
+		return (List<Cliente>) query.getResultList();
+	}
+
+	@Override
+	public void insere(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void atualiza(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

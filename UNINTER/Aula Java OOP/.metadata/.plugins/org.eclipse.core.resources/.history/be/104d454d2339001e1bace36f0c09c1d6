@@ -1,0 +1,37 @@
+package br.com.springboot.dao;
+
+import java.util.List;
+
+public class ClienteDAO implements CRUD<Cliente,Long> {
+
+	@Override
+	public Cliente pesquisaPeloId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cliente> lista() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insere(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void atualiza(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void remove(Cliente t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

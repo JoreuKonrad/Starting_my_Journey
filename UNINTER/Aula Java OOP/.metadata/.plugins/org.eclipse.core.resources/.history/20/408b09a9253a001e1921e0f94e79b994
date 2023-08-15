@@ -1,0 +1,10 @@
+package br.com.springboot.bo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class ClienteBOTest {
+	
+	@Autowired
+	private ClienteBO bo;
+	
+}

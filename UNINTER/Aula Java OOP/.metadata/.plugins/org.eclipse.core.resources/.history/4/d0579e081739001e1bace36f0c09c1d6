@@ -1,0 +1,20 @@
+package br.com.springboot.model;
+
+import java.time.LocalDate;
+
+public class Cliente {
+	
+	// Atributos
+	
+	private Long id;
+	private String nome;
+	private String cpf;
+	private LocalDate dataNascimento;
+	private Sexo sexo;
+	private String telefone;
+	private String celular;
+	private String email;
+	private boolean ativo;
+	
+	
+}

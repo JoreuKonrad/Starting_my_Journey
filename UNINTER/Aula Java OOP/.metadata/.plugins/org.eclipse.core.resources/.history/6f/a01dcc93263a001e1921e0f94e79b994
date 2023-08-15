@@ -1,0 +1,33 @@
+package br.com.springboot.bo;
+
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.springboot.model.Cliente;
+import br.com.springboot.model.Sexo;
+
+public class ClienteBOTest {
+	
+	@Autowired
+	private ClienteBO bo;
+	
+	public void insere() {
+		Cliente cliente = new cliente();
+		cliente.setNome("Joreu");
+		cliente.setCpf("3490833420");
+		cliente.setDataNascimento(LocalDate.of(2000, 2, 20));
+		cliente.setSexo(Sexo.MASCULINO);
+		cliente.setTelefone("238928390");
+		cliente.setCelular("324234");
+		cliente.setAtivo(true);
+		bo.insere(cliente);
+		
+	}
+	
+	
+	
+	
+	
+	
+}

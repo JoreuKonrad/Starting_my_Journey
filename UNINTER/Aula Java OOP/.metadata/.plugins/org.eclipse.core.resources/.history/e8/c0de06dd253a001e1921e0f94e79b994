@@ -1,0 +1,26 @@
+package br.com.springboot.bo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.springboot.model.Cliente;
+
+public class ClienteBOTest {
+	
+	@Autowired
+	private ClienteBO bo;
+	
+	public void insere() {
+		Cliente cliente = new cliente();
+		cliente.setNome("Joreu");
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+}
