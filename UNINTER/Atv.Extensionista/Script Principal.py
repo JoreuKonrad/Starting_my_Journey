@@ -18,10 +18,10 @@ driver.get(url)
 
 usuario = driver.find_element(By.ID,'txtCnpj').click()
 usuario = driver.find_element(By.ID,'txtCnpj')
-usuario.send_keys('*******') #Login da Empresa 
+usuario.send_keys('*******') #Login 
 senha = driver.find_element(By.ID,'txtSenha').click()
 senha = driver.find_element(By.ID,'txtSenha')
-senha.send_keys('********') # Senha de Empresa
+senha.send_keys('********') # Senha
 
 time.sleep(5)
 buttom = driver.find_element(By.ID,'btEntrar').click()
