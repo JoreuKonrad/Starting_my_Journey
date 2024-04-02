@@ -1,0 +1,26 @@
+package entities;
+
+import java.util.Date;
+
+import entities.enums.OrderStatus;
+
+public class Order {
+	
+	private Integer id;
+	private Date data;
+	private OrderStatus status;
+	
+	public Order() {
+		
+	}
+
+	public Order(Integer id, Date data, OrderStatus status) {
+		this.id = id;
+		this.data = data;
+		this.status = status;
+	}
+	
+
+	
+	
+}

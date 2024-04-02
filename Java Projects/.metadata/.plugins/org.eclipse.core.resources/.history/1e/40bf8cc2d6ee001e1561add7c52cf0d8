@@ -1,0 +1,21 @@
+package application;
+
+import java.util.ArrayList;
+
+public class Program {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Lista<String> list = new ArrayList<>();
+		
+		list.add("Maria");
+		list.add("Tobby");
+		list.add("Marcos");
+		list.add("Bob");
+		list.add("Ana");
+		
+		
+	}
+
+}

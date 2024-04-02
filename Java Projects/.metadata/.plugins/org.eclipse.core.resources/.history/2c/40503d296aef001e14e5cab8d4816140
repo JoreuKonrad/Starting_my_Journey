@@ -1,0 +1,32 @@
+package application;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Informe o departamento: ");
+		String departmentName = sc.nextLine();
+		
+		System.out.println("Informe os dados do funcionario.");
+		System.out.println("Informe o nome do funcionario: ");
+		String workerName = sc.nextLine();
+		System.out.println("Informe o nivel do funcionario: ");
+		String workerLevel = sc.nextLine();
+		System.out.println("Informe a base salarial do funcionario: ");
+		String workerBaseSalary = sc.nextLine();
+		
+		
+		
+		
+		
+		sc.close();
+
+	}
+
+}

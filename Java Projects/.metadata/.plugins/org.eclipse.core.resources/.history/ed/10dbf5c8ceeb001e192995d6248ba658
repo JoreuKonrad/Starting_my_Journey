@@ -1,0 +1,24 @@
+package application;
+
+import java.util.Locale;
+
+public class Program {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Insira o Raio: ");
+		double radius = sc.nextDouble();
+		
+		double c = circumference(radius);
+		
+		double v = volume(radius);
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,30 @@
+package entities;
+
+import java.util.List;
+
+public class Worker {
+	
+	private String name;
+	private String level;
+	private Double baseSalary;
+	
+	private Department department;
+	private List<HourContract> contracts = new Arraylist<>();
+	
+	
+	public Worker() {
+		
+	}
+
+
+	public Worker(String name, String level, Double baseSalary, Department department) {
+		super();
+		this.name = name;
+		this.level = level;
+		this.baseSalary = baseSalary;
+		this.department = department;
+	}
+	
+	
+	
+}

@@ -1,0 +1,41 @@
+package application;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entities.Product;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Quantos itens?");
+		int n = sc.nextInt();
+		
+		Product[] vect = new Product[n];
+		
+		for(int i = 0;i<n;i++) {
+			System.out.println("Item " + n);
+			//sc.nextInt();
+			System.out.println("Nome Item " + n);
+			String name = sc.nextLine();
+			System.out.println("Preço Item " + n);
+			double price = sc.nextFloat();
+			vect[i] = new Product(name, price);
+			
+		}
+		
+		double sum = 0.0;
+		for(int i = 0;i<n;i++) {
+			sum += vect[n].getPrice();
+		}
+		
+		System.out.println("Soma total: " + sum);
+		
+		sc.close();
+	}
+
+}

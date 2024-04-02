@@ -1,0 +1,14 @@
+package entities;
+
+public class Worker {
+	
+	private String name;
+	private String level;
+	private Double baseSalary;
+	
+	private Departament department;
+	
+	
+	
+	
+}
