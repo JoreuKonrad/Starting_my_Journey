@@ -1,0 +1,15 @@
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Excel.exe
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Excel.deps.json
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Excel.runtimeconfig.json
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Excel.dll
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Excel.pdb
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.AssemblyInfoInputs.cache
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.AssemblyInfo.cs
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.csproj.CoreCompileInputs.cache
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.sourcelink.json
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.dll
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\refint\Excel.dll
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.pdb
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\Excel.genruntimeconfig.cache
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\obj\Debug\net8.0\ref\Excel.dll
