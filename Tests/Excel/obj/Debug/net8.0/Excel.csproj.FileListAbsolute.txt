@@ -48,3 +48,4 @@ C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug
 C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Text.Encoding.CodePages.dll
 C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\bin\Debug\net8.0\Microsoft.Office.Interop.Outlook.dll

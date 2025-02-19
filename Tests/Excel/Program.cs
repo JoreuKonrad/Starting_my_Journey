@@ -2,6 +2,7 @@
 using OfficeOpenXml.Table;
 using System;
 using System.IO;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 class Program
 {
@@ -45,7 +46,7 @@ class Program
 
             // Criar uma Tabela Dinâmica
             var pivotTable = worksheet2.PivotTables.Add(worksheet2.Cells[1, 7], worksheet.Cells[1, 1, 5, 4], "PivotTable1");
-
+                       
             // Adicionar campos à Tabela Dinâmica
             pivotTable.RowFields.Add(pivotTable.Fields["Categoria"]);
             pivotTable.ColumnFields.Add(pivotTable.Fields["Produto"]);
@@ -57,5 +58,25 @@ class Program
         }
 
         Console.WriteLine("Tabela dinâmica criada com sucesso!");
+  
+
+
+        var outlookApp = new Outlook.Application();
+        Outlook.MailItem mailItem = (Outlook.MailItem)outlookApp.CreateItem(Outlook.OlItemType.olMailItem);
+        mailItem.Subject = "PivotTable Example";
+        mailItem.To = "joreu.konrad@gmail.com";
+        mailItem.Body = "Please find the attached Excel file with the pivot table example.";
+        mailItem.Attachments.Add(@"C:\Users\Konrad\Documents\VS Workspace\Starting_my_Journey\Tests\Excel\PivotTableExample.xlsx"); // Update the path if necessary
+
+        try
+        {
+            mailItem.Send();
+            Console.WriteLine("Email enviado com sucesso!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Erro ao enviar email: " + ex.Message);
+        }
+    
     }
 }
