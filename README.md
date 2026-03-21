@@ -1,6 +1,7 @@
 # Starting_my_Journey
-A little step for a man, a great leap for the mankind.
 
-These are my first projects. Some of them I started by myself and other I wrote for my certifications.
+Welcome to my repository! 
 
-The major part of these certifications come from DataCamp, Udemy, Kagle and books.
+Feel free to check all the projects I have followed or created by myself.
+
+Almost all part of them are experimental purpose. Any suggestion to improve them are welcome!
