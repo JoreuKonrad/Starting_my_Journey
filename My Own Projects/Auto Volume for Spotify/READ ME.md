@@ -1,4 +1,4 @@
-<H1>Spotify Auto-Volume</H1>
+<H1>Auto Volume for Spotify</H1>
 <p>This is a simple Python script that automatically adjusts the volume of Spotify based on whether other applications are making noise.</p>
 <H2>How it works</H2>
 <p>The script uses the `pycaw` library to control the volume of Spotify. It continuously checks for other applications that are producing sound and adjusts the volume of Spotify accordingly. If another application is making noise, the volume of Spotify will be reduced. If no other applications are making noise, the volume of Spotify will be restored to its original level.</p>
