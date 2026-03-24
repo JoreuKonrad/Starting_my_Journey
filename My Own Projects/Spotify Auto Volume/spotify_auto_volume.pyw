@@ -38,8 +38,8 @@ def monitorar_audio():
                 if round(spotify_session.SimpleAudioVolume.GetMasterVolume(), 2) != round(novo_vol, 2):
                     spotify_session.SimpleAudioVolume.SetMasterVolume(novo_vol, None)
             
-            # Diminuímos o sleep para 0.3 segundos para uma resposta mais rápida
-            time.sleep(0.3)
+            # Diminuímos o sleep para 0.8 segundos para uma resposta mais rápida
+            time.sleep(0.8)
     finally:
         pythoncom.CoUninitialize()
 
