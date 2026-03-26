@@ -8,22 +8,23 @@ from pycaw.pycaw import AudioUtilities, IAudioMeterInformation
 
 # Configurações Iniciais
 config = {
-    "VOLUME_REDUZIDO": 0.4,
+    "VOLUME_REDUZIDO": 0.6,
     "VOLUME_NORMAL": 1.0,
     "APP_ALVO": "spotify.exe",
-    "APP_GATILHO": "chrome.exe",
-    "TOLERANCIA_SEGUNDOS": 3.0  # Tempo de espera antes de restaurar o volume
+    "APPS_GATILHO": ["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe", "opera.exe"],
+    "TOLERANCIA_SEGUNDOS": 3.0,
+    "STANDBY": False
 }
 
 def monitorar_audio():
     comtypes.CoInitialize()
     try:
-        ultimo_som_chrome_time = 0.0
+        ultimo_som_navegador_time = 0.0
         
         while True:
             sessions = AudioUtilities.GetAllSessions()
             spotify_session = None
-            chrome_fazendo_barulho = False
+            navegador_fazendo_barulho = False
             
             for session in sessions:
                 if not session.Process:
@@ -35,30 +36,36 @@ def monitorar_audio():
                 if process_name == config["APP_ALVO"]:
                     spotify_session = session
                 
-                # Identifica as sessões do Chrome e checa se há pico de áudio
-                elif process_name == config["APP_GATILHO"]:
+                # Identifica se a sessão pertence a QUALQUER navegador da lista
+                elif process_name in config["APPS_GATILHO"]:
                     try:
                         meter = session._ctl.QueryInterface(IAudioMeterInformation)
                         if meter.GetPeakValue() > 0.001: 
-                            chrome_fazendo_barulho = True
+                            navegador_fazendo_barulho = True
                     except Exception:
                         pass
+
+            # Lógica de Standby
+            if config["STANDBY"]:
+                if spotify_session and spotify_session.SimpleAudioVolume:
+                    if round(spotify_session.SimpleAudioVolume.GetMasterVolume(), 2) != round(config["VOLUME_NORMAL"], 2):
+                        spotify_session.SimpleAudioVolume.SetMasterVolume(config["VOLUME_NORMAL"], None)
+                time.sleep(0.3)
+                continue
             
-            # Atualiza o cronômetro se o Chrome estiver tocando som agora
-            if chrome_fazendo_barulho:
-                ultimo_som_chrome_time = time.time()
+            # Atualiza o cronômetro se algum navegador estiver tocando som agora
+            if navegador_fazendo_barulho:
+                ultimo_som_navegador_time = time.time()
             
             # Aplica a lógica de volume no Spotify
             if spotify_session and spotify_session.SimpleAudioVolume:
-                tempo_decorrido = time.time() - ultimo_som_chrome_time
+                tempo_decorrido = time.time() - ultimo_som_navegador_time
                 
-                # Se o Chrome fez barulho nos últimos 3 segundos, mantém reduzido
                 if tempo_decorrido < config["TOLERANCIA_SEGUNDOS"]:
                     novo_vol = config["VOLUME_REDUZIDO"]
                 else:
                     novo_vol = config["VOLUME_NORMAL"]
                 
-                # Ajuste instantâneo se houver diferença
                 if round(spotify_session.SimpleAudioVolume.GetMasterVolume(), 2) != round(novo_vol, 2):
                     spotify_session.SimpleAudioVolume.SetMasterVolume(novo_vol, None)
             
@@ -68,6 +75,9 @@ def monitorar_audio():
 
 def set_volume_config(v):
     config["VOLUME_REDUZIDO"] = v / 100.0
+
+def toggle_standby(icon, item):
+    config["STANDBY"] = not config["STANDBY"]
 
 def fechar_aplicacao(icon):
     icon.stop()
@@ -98,12 +108,20 @@ def criar_icone():
     menu_volumes = pystray.Menu(*criar_menu_volumes())
     
     main_menu = pystray.Menu(
+        pystray.MenuItem("Modo Standby", toggle_standby, checked=lambda item: config["STANDBY"]),
         pystray.MenuItem("Configurar Volume Reduzido", menu_volumes),
         pystray.MenuItem("Fechar Aplicação", fechar_aplicacao)
     )
 
-    icon = pystray.Icon("SpotifyDuck", image, "Auto-Volume for Spotify", menu=main_menu)
-    icon.run()
+    # Nome ajustado para "Auto Volume for Spotify"
+    icon = pystray.Icon("AutoVolumeForSpotify", image, "Auto Volume for Spotify", menu=main_menu)
+
+    def setup_inicial(icon):
+        icon.visible = True
+        # Título da notificação ajustado
+        icon.notify("O Auto Volume for Spotify foi iniciado com sucesso.", "Auto Volume for Spotify")
+
+    icon.run(setup=setup_inicial)
 
 if __name__ == "__main__":
     t = threading.Thread(target=monitorar_audio, daemon=True)
