@@ -113,12 +113,10 @@ def criar_icone():
         pystray.MenuItem("Fechar Aplicação", fechar_aplicacao)
     )
 
-    # Nome ajustado para "Auto Volume for Spotify"
     icon = pystray.Icon("AutoVolumeForSpotify", image, "Auto Volume for Spotify", menu=main_menu)
 
     def setup_inicial(icon):
         icon.visible = True
-        # Título da notificação ajustado
         icon.notify("O Auto Volume for Spotify foi iniciado com sucesso.", "Auto Volume for Spotify")
 
     icon.run(setup=setup_inicial)
