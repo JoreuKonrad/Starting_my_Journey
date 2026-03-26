@@ -1,47 +1,61 @@
 import time
 import threading
 import os
-import pythoncom
+import comtypes
 from PIL import Image, ImageDraw
 import pystray
-from pycaw.pycaw import AudioUtilities
+from pycaw.pycaw import AudioUtilities, IAudioMeterInformation
 
 # Configurações Iniciais
 config = {
     "VOLUME_REDUZIDO": 0.6,
     "VOLUME_NORMAL": 1.0,
-    "APP_ALVO": "Spotify.exe"
+    "APP_ALVO": "spotify.exe",
+    "APP_GATILHO": "chrome.exe"
 }
 
 def monitorar_audio():
-    pythoncom.CoInitialize()
+    # pycaw utiliza comtypes para inicializar as interfaces COM no Windows
+    comtypes.CoInitialize()
     try:
         while True:
             sessions = AudioUtilities.GetAllSessions()
             spotify_session = None
-            outros_fazendo_barulho = False
+            chrome_fazendo_barulho = False
             
             for session in sessions:
-                if session.Process and session.Process.name().lower() == config["APP_ALVO"].lower():
+                # Ignora sessões de áudio que não possuem um processo associado
+                if not session.Process:
+                    continue
+                
+                process_name = session.Process.name().lower()
+                
+                # Identifica a sessão do Spotify
+                if process_name == config["APP_ALVO"]:
                     spotify_session = session
-                elif session.Process and session.Process.name() != config["APP_ALVO"] and session.Process.name() != "System Idle Process":
-
-                    # Se o pico for maior que 0.001, significa que há som saindo DE FATO
-                    meter = session._ctl.QueryInterface(pythoncom.IID_IUnknown).QueryInterface(AudioUtilities.IAudioMeterInformation)
-                    if meter.GetPeakValue() > 0.001: 
-                        outros_fazendo_barulho = True
+                
+                # Identifica as sessões do Chrome e checa se há pico de áudio
+                elif process_name == config["APP_GATILHO"]:
+                    try:
+                        # Extrai a interface IAudioMeterInformation corretamente com o comtypes
+                        meter = session._ctl.QueryInterface(IAudioMeterInformation)
+                        if meter.GetPeakValue() > 0.001: 
+                            chrome_fazendo_barulho = True
+                    except Exception:
+                        pass # Ignora falhas de leitura em sessões específicas
             
+            # Se encontrou o Spotify, aplica a lógica de volume
             if spotify_session and spotify_session.SimpleAudioVolume:
-                novo_vol = config["VOLUME_REDUZIDO"] if outros_fazendo_barulho else config["VOLUME_NORMAL"]
+                novo_vol = config["VOLUME_REDUZIDO"] if chrome_fazendo_barulho else config["VOLUME_NORMAL"]
                 
                 # Ajuste instantâneo se houver diferença
                 if round(spotify_session.SimpleAudioVolume.GetMasterVolume(), 2) != round(novo_vol, 2):
                     spotify_session.SimpleAudioVolume.SetMasterVolume(novo_vol, None)
             
-            # Diminuímos o sleep para 0.8 segundos para uma resposta mais rápida
-            time.sleep(0.8)
+            # Pausa de 0.3 segundos
+            time.sleep(0.3)
     finally:
-        pythoncom.CoUninitialize()
+        comtypes.CoUninitialize()
 
 def set_volume_config(v):
     config["VOLUME_REDUZIDO"] = v / 100.0
