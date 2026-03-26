@@ -11,20 +11,21 @@ config = {
     "VOLUME_REDUZIDO": 0.6,
     "VOLUME_NORMAL": 1.0,
     "APP_ALVO": "spotify.exe",
-    "APP_GATILHO": "chrome.exe"
+    "APP_GATILHO": "chrome.exe",
+    "TOLERANCIA_SEGUNDOS": 3.0  # Tempo de espera antes de restaurar o volume
 }
 
 def monitorar_audio():
-    # pycaw utiliza comtypes para inicializar as interfaces COM no Windows
     comtypes.CoInitialize()
     try:
+        ultimo_som_chrome_time = 0.0
+        
         while True:
             sessions = AudioUtilities.GetAllSessions()
             spotify_session = None
             chrome_fazendo_barulho = False
             
             for session in sessions:
-                # Ignora sessões de áudio que não possuem um processo associado
                 if not session.Process:
                     continue
                 
@@ -37,22 +38,30 @@ def monitorar_audio():
                 # Identifica as sessões do Chrome e checa se há pico de áudio
                 elif process_name == config["APP_GATILHO"]:
                     try:
-                        # Extrai a interface IAudioMeterInformation corretamente com o comtypes
                         meter = session._ctl.QueryInterface(IAudioMeterInformation)
                         if meter.GetPeakValue() > 0.001: 
                             chrome_fazendo_barulho = True
                     except Exception:
-                        pass # Ignora falhas de leitura em sessões específicas
+                        pass
             
-            # Se encontrou o Spotify, aplica a lógica de volume
+            # Atualiza o cronômetro se o Chrome estiver tocando som agora
+            if chrome_fazendo_barulho:
+                ultimo_som_chrome_time = time.time()
+            
+            # Aplica a lógica de volume no Spotify
             if spotify_session and spotify_session.SimpleAudioVolume:
-                novo_vol = config["VOLUME_REDUZIDO"] if chrome_fazendo_barulho else config["VOLUME_NORMAL"]
+                tempo_decorrido = time.time() - ultimo_som_chrome_time
+                
+                # Se o Chrome fez barulho nos últimos 3 segundos, mantém reduzido
+                if tempo_decorrido < config["TOLERANCIA_SEGUNDOS"]:
+                    novo_vol = config["VOLUME_REDUZIDO"]
+                else:
+                    novo_vol = config["VOLUME_NORMAL"]
                 
                 # Ajuste instantâneo se houver diferença
                 if round(spotify_session.SimpleAudioVolume.GetMasterVolume(), 2) != round(novo_vol, 2):
                     spotify_session.SimpleAudioVolume.SetMasterVolume(novo_vol, None)
             
-            # Pausa de 0.3 segundos
             time.sleep(0.3)
     finally:
         comtypes.CoUninitialize()
@@ -82,7 +91,6 @@ def criar_menu_volumes():
     return itens
 
 def criar_icone():
-    # Criação do ícone visual
     image = Image.new('RGB', (64, 64), (0, 0, 0))
     dc = ImageDraw.Draw(image)
     dc.ellipse((10, 10, 54, 54), fill=(30, 215, 96))
