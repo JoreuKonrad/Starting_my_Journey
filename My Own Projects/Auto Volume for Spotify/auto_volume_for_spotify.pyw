@@ -8,7 +8,7 @@ from pycaw.pycaw import AudioUtilities, IAudioMeterInformation
 
 # Configurações Iniciais
 config = {
-    "VOLUME_REDUZIDO": 0.6,
+    "VOLUME_REDUZIDO": 0.4,
     "VOLUME_NORMAL": 1.0,
     "APP_ALVO": "spotify.exe",
     "APP_GATILHO": "chrome.exe",
@@ -102,7 +102,7 @@ def criar_icone():
         pystray.MenuItem("Fechar Aplicação", fechar_aplicacao)
     )
 
-    icon = pystray.Icon("SpotifyDuck", image, "Spotify Auto-Volume", menu=main_menu)
+    icon = pystray.Icon("SpotifyDuck", image, "Auto-Volume for Spotify", menu=main_menu)
     icon.run()
 
 if __name__ == "__main__":
