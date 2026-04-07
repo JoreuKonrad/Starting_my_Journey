@@ -8,7 +8,7 @@ from pycaw.pycaw import AudioUtilities, IAudioMeterInformation
 
 # Configurações Iniciais
 config = {
-    "VOLUME_REDUZIDO": 0.6,
+    "VOLUME_REDUZIDO": 0.2,
     "VOLUME_NORMAL": 1.0,
     "APP_ALVO": "spotify.exe",
     "APPS_GATILHO": ["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe", "opera.exe"],
